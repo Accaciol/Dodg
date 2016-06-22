@@ -1,9 +1,10 @@
 <html>
 
 <body bgcolor=" ">
-<img src="board.png" id='board' style='position:absolute; top:0; left:0; width:1200 ; height: 920 ; z         -index:1'>
-<img src="Jogador.png" id='Jogador' style='position:absolute; top:0; left:0;    width:100px; z-index:3'>
-<img src="ball.png" id='ball' style='position:absolute; top:200; left:0;    width:100px; z-index:2'>
+<img src="board.png" id='board' style='position:absolute; top:0; left:0;
+        width:1200 ; height: 920 ; z         -index:1'>
+<img src="Jogador.png" id='Jogador' style='position:absolute; top:0; left:0;            width:100px; z-index:3'>
+<img src="ball.png" id='ball' style='position:absolute; top:200; left:0;            width:100px; z-index:2'>
 <div id='scoreId' style='font-size:300%; position:absolute; top:0; left:0; z-index:4'>Start Dodgeball game</div>
 
 <script>
@@ -46,11 +47,11 @@ function KeyDownMoveIt(e)
   
   
   // limite de até onde o jogador pode ir, se subir o valor do jogador ele pode ultrapassar a tela
-   if (xJogador > 1200 - 50)
-   xJogador = 1200 - 50;
+   if (xJogador > 1200 - 100)
+   xJogador = 1200 - 100;
 
-   if (yJogador > 900 - 50)
-   yJogador = 900 - 50;
+   if (yJogador > 900 - 100)
+   yJogador = 900 - 100;
 
    if (xJogador < 0)
    xJogador = 0;
@@ -89,7 +90,7 @@ function moveTimer() //torna o movimento randomico
    if ((xJogador < xBall +100) && (xJogador +100 > xBall) && (yJogador < yBall +100) && (yJogador +100 > yBall))
    {
       clearTimeout(timerA);
-      document.body.style.backgroundColor="black";
+      document.body.style.backgroundColor="white";
       document.getElementById("scoreId").innerHTML = " GAMEOVER: <br/>score: " + score;
       
       
