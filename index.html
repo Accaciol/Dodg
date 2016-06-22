@@ -1,0 +1,106 @@
+<html>
+
+<body bgcolor=" ">
+<img src="board.png" id='board' style='position:absolute; top:0; left:0; width:1200 ; height: 920 ; z         -index:1'>
+<img src="Jogador.png" id='Jogador' style='position:absolute; top:0; left:0;    width:100px; z-index:3'>
+<img src="ball.png" id='ball' style='position:absolute; top:200; left:0;    width:100px; z-index:2'>
+<div id='scoreId' style='font-size:300%; position:absolute; top:0; left:0; z-index:4'>Start Dodgeball game</div>
+
+<script>
+
+var heighty = screen.height ;
+var widthx = screen.width ;
+
+var JogadorObj = document.getElementById('Jogador').style;
+var xJogador = 0;
+var yJogador = 0;
+
+var ballObj = document.getElementById('ball').style;
+var xBall = 80;
+var yBall = 70;
+
+var xSpeed = 50;
+var ySpeed = 50;
+
+var timerA;
+moveTimer();
+
+var score = 0;
+var speedInc = 0;
+
+document.onkeydown = KeyDownMoveIt;
+
+function KeyDownMoveIt(e)
+{
+   if (e.keyCode == 37) //left
+   xJogador = xJogador - 10 - speedInc*70;
+
+   if (e.keyCode == 39) //right
+   xJogador = xJogador + 10 + speedInc*70;
+
+   if (e.keyCode == 38) //up
+   yJogador = yJogador - 10 - speedInc*70;
+
+   if (e.keyCode == 40) //down
+   yJogador = yJogador + 10 + speedInc*70;
+  
+  
+  // limite de até onde o jogador pode ir, se subir o valor do jogador ele pode ultrapassar a tela
+   if (xJogador > 1200 - 50)
+   xJogador = 1200 - 50;
+
+   if (yJogador > 900 - 50)
+   yJogador = 900 - 50;
+
+   if (xJogador < 0)
+   xJogador = 0;
+
+   if (yJogador < 0)
+   yJogador = 0;
+
+   JogadorObj.left = xJogador;
+   JogadorObj.top = yJogador;
+}
+
+function moveTimer() //torna o movimento randomico
+{
+   if (xBall + xSpeed > 1200 - 100)
+   xSpeed = -70 * Math.random() - 5 - speedInc;
+
+   if (xBall + xSpeed < 0)
+   xSpeed = 70 * Math.random() + 5 + speedInc;
+
+   if (yBall + ySpeed > 900 - 100)
+   ySpeed = -70 * Math.random() - 5 - speedInc;
+
+   if (yBall + ySpeed < 0)
+   ySpeed = 70 * Math.random() + 5 + speedInc;
+
+   xBall = xBall + xSpeed;
+   yBall = yBall + ySpeed;
+
+   ballObj.left = xBall;
+   ballObj.top = yBall;
+    document.getElementById("scoreId").innerHTML = "Score: " + score;
+
+   timerA = setTimeout('moveTimer()',40);
+  
+   // verifica se o tamanho da ball é igual a da ball2, se for igual ela da game over e mostra o score
+   if ((xJogador < xBall +100) && (xJogador +100 > xBall) && (yJogador < yBall +100) && (yJogador +100 > yBall))
+   {
+      clearTimeout(timerA);
+      document.body.style.backgroundColor="black";
+      document.getElementById("scoreId").innerHTML = " GAMEOVER: <br/>score: " + score;
+      
+      
+   }
+   
+   score++;
+   
+   speedInc = score * 0.01;
+}
+
+</script>
+
+</body>
+</html>
